@@ -62,5 +62,30 @@ public class Sort {
         return arr;
     }
 
+    /**
+     * 插入排序
+     * @param arr
+     * @param n
+     * @return
+     */
+    public static int[] insertSort(int[] arr,int n){
+        if (n == 0){
+            return arr;
+        }
+        for (int i = 1;i< n;i++){
+            for (int j = i;j > 0;j--){
+                if (arr[j] < arr[j-1]){
+                    SortUtils.swap(arr,j,j-1);
+                }else{
+                    break;
+                }
+            }
+        }
+        return arr;
+    }
+
+
+
+
 
 }
