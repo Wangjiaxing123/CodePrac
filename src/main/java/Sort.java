@@ -1,7 +1,7 @@
 public class Sort {
 
     /**
-     * 冒泡排序
+     * 冒泡排序 复杂度N*N
      * @param arr
      * @return
      */
@@ -84,8 +84,48 @@ public class Sort {
         return arr;
     }
 
+    /**
+     * 归并排序 a*N(b/2)+O(N) a=2,b=2,d=0 T(N) = N*logN
+     * @param arr
+     * @param n
+     * @return
+     */
+    public static int[] mergeSort(int[] arr,int n){
+        if (n==0 || n < 2){
+            return arr;
+        }
+        mergeProcess(arr,0,n-1);
+        return arr;
+    }
 
+    public static void mergeProcess(int[] arr,int l,int r){
+        if (l == r){
+            return;
+        }
+        int mid = l+ ((r-l) >> 1) ;
+        mergeProcess(arr,l,mid);
+        mergeProcess(arr,mid+1,r);
+        merge(arr,l,mid,r);
+    }
 
+    public static void merge(int[] arr,int l,int mid,int r){
+        int[] help = new int[r-l+1];
+        int p1 = l;
+        int p2 = mid + 1;
+        int i = 0;
+        while (p1 <= mid && p2 <= r){
+            help[i++] = arr[p1] < arr[p2] ? arr[p1++]:arr[p2++];
+        }
 
+        while (p1 <= mid){
+            help[i++] = arr[p1++];
+        }
 
+        while (p2 <= r){
+            help[i++] = arr[p2++];
+        }
+        for(i=0;i<help.length;i++){
+            arr[l+i] = help[i];
+        }
+    }
 }
