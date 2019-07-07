@@ -1,52 +1,49 @@
-public class SmallSum {
+package me.newtrekwang.codeprac.class01;
 
+/**
+ *  打印数组中的逆序对
+ * @author newtrekWang
+ * @email  wangjiaxing20160101@gmail.com
+ * @time   2019/7/7  11:57
+ */
+public class RerviseCouple {
     public static void main(String[] args){
-        int testTime = 500000;
-        int maxSize = 100;
-        int maxValue = 100;
-        boolean succeed = true;
-        for (int i = 0; i < testTime; i++) {
-            int[] arr1 = generateRandomArray(maxSize, maxValue);
-            int[] arr2 = copyArray(arr1);
-            if (smallSum(arr1) != comparator(arr2)) {
-                succeed = false;
-                printArray(arr1);
-                printArray(arr2);
-                break;
-            }
-        }
-        System.out.println(succeed ? "Nice!" : "Fucking fucked!");
+        int[] arr = generateRandomArray(10,10);
+        printArray(arr);
+        printRerviseCouple(arr);
+        printArray(arr);
+
     }
 
-    /**
-     * 求小和数  每次merge找右边数组元素比左边数组元素大的个数，然后也要排序
-     * @param arr
-     * @return
-     */
-    public static int smallSum(int[] arr){
+    public static void printRerviseCouple(int[] arr){
         if (arr == null || arr.length < 2){
-            return 0;
+            return;
         }
-        return mergeProcess(arr,0,arr.length-1);
+        mergeProcess(arr,0,arr.length-1);
     }
 
-    public static int mergeProcess(int[] arr,int l,int r){
+    public static void mergeProcess(int[] arr,int l,int r){
         if (l == r){
-            return 0;
+            return;
         }
         int mid = l+((r-l)>>1);
-        return mergeProcess(arr,l,mid)+mergeProcess(arr,mid+1,r)+merge(arr,l,mid,r);
+        mergeProcess(arr,l,mid);
+        mergeProcess(arr,mid+1,r);
+        merge(arr,l,mid,r);
     }
 
-    public static int merge(int[] arr,int l,int mid,int r){
+    public static void merge(int[] arr,int l,int mid,int r){
         int[] help = new int[r-l+1];
-        int res = 0;
-        int p1 = l;
-        int p2 = mid+1;
-        int i = 0;
-        while (p1<=mid && p2<= r){
-            res += arr[p1] < arr[p2] ? arr[p1]*(r-p2+1):0;
-            help[i++] = arr[p1] < arr[p2] ? arr[p1++]:arr[p2++];
+        int p1= l;
+        int p2= mid+1;
+        int i=0;
+        while (p1 <= mid && p2<= r){
+            if (arr[p1] < arr[p2]){
+                for(int j = p2;j <= r ;j++){
+                    System.out.println(arr[p1]+","+arr[p2]);
+                }
+            }
+            help[i++] = arr[p1]<arr[p2] ? arr[p1++]:arr[p2++];
         }
         while (p1 <= mid){
             help[i++] = arr[p1++];
@@ -54,25 +51,11 @@ public class SmallSum {
         while (p2 <= r){
             help[i++] = arr[p2++];
         }
-        for (i = 0;i<help.length;i++){
+        for (i = 0 ;i<help.length;i++){
             arr[l+i] = help[i];
         }
-        return res;
     }
 
-    // for test
-    public static int comparator(int[] arr){
-        if (arr == null || arr.length < 2) {
-            return 0;
-        }
-        int res = 0;
-        for (int i = 1; i < arr.length; i++) {
-            for (int j = 0; j < i; j++) {
-                res += arr[j] < arr[i] ? arr[j] : 0;
-            }
-        }
-        return res;
-    }
 
     public static int[] generateRandomArray(int maxSize,int maxValue){
         int[] arr = new int[(int) ((maxSize+1)*Math.random())];
@@ -121,3 +104,5 @@ public class SmallSum {
         System.out.println();
     }
 }
+
+

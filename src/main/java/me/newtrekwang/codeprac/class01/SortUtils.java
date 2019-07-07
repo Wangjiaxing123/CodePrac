@@ -1,3 +1,5 @@
+package me.newtrekwang.codeprac.class01;
+
 public class SortUtils {
     /**
      * 交换值

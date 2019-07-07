@@ -52,7 +52,7 @@
             for(int j = i+1;j <= n-1;j++){
                 // j作为index最大会到n-1，不会出现越界
                 if (arr[i] > arr[j]){
-                    SortUtils.swap(arr,i,j);
+                    me.newtrekwang.codeprac.class01.SortUtils.swap(arr,i,j);
                 }
             }
         }
@@ -76,7 +76,7 @@ public static int[] sectionSort_1(int[] arr,int n){
                 }
             }
             if (minIndex != i){
-                SortUtils.swap(arr,minIndex,i);
+                me.newtrekwang.codeprac.class01.SortUtils.swap(arr,minIndex,i);
             }
         }
         return arr;
