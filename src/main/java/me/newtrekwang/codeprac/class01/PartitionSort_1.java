@@ -1,7 +1,12 @@
 package me.newtrekwang.codeprac.class01;
 
 import java.util.Arrays;
-
+/**
+ *  荷兰国旗问题
+ * @author newtrekWang
+ * @email  wangjiaxing20160101@gmail.com
+ * @time   2019/7/12  0:34
+ */
 public class PartitionSort_1 {
 
     public static void main(String[] args){
