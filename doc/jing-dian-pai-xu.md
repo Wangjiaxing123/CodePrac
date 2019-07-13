@@ -189,7 +189,43 @@ public void merge(int[] a, int[] b, int[] c){
     }
 ```
 
-# 桶排序
+# 快速排序
+
+随机快排：  
+
+```java
+ public static void quickSort(int[] arr,int n){
+        sortProcess(arr,0,n-1);
+    }
+
+    public static void sortProcess(int[] arr,int l,int r){
+        if (l < r){
+            // 加上这个就是随机快排，有期望值
+            SortUtils.swap(arr,(int)(l+(Math.random()*(r-l+1))),r);
+
+            int[] p = partition(arr,l,r);
+            sortProcess(arr,l,p[0]-1);
+            sortProcess(arr,p[1]+1,r);
+        }
+
+    }
+
+    public static int[] partition(int[] arr,int l,int r){
+        int less = l-1;
+        int more = r;
+        while (l < more){
+            if (arr[l] < arr[r]){
+                SortUtils.swap(arr,++less,l++);
+            }else if (arr[l] > arr[r]){
+                SortUtils.swap(arr,l,--more);
+            }else {
+                l++;
+            }
+        }
+        SortUtils.swap(arr,more,r);
+        return new int[]{less+1,more};
+    }
+```
 
 
 
